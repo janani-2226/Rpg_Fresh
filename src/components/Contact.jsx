@@ -2,6 +2,7 @@
 // Converted from HTML to React with Tailwind CSS
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // ── Data ───────────────────────────────────────────────────────────────────
 
@@ -18,17 +19,9 @@ const CONTACT_DETAILS = [
   },
 ];
 
-const OFFICES = [
-  {
-    icon: "location_on",
-    title: "India Headquarters",
-    address: "Chennai Logistics Hub, Tamil Nadu",
-  },
-  {
-    icon: "corporate_fare",
-    title: "UAE Distribution Center",
-    address: "Jebel Ali Free Zone, Dubai",
-  },
+const QUICK_LINKS = [
+  { icon: "grocery", label: "Our Products", desc: "Browse our full export catalog", to: "/products" },
+  { icon: "photo_library", label: "Gallery", desc: "See our farms and packaging", to: "/gallery" },
 ];
 
 
@@ -65,10 +58,28 @@ export default function Contact() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Wire up your API call / form submission here
-    console.log("Form submitted:", form);
-  };
+  e.preventDefault();
+
+  const message = `
+🌿 RPG Fresh Inquiry
+
+👤 Name: ${form.name}
+📧 Email: ${form.email}
+📝 Subject: ${form.subject}
+
+💬 Message:
+${form.message}
+  `;
+
+  const whatsappNumber = "918438115340";
+
+  const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+
+  window.open(whatsappURL, "_blank");
+  setForm({ name: "", email: "", subject: "", message: "" });
+};
 
   return (
     <div
@@ -79,40 +90,31 @@ export default function Contact() {
 
       <main>
         {/* ── Hero ────────────────────────────────────────────────────────── */}
-        <section className="relative pt-24 pb-16 px-6 overflow-hidden">
-          {/* Decorative blob */}
-          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-green-700/5 rounded-full blur-[120px] pointer-events-none" />
-
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="flex flex-col items-start gap-4">
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-green-700">
-                Global Reach • Farm Fresh
-              </span>
-              <h1 className="text-5xl font-bold text-gray-900 max-w-2xl leading-tight">
-                Connect with{" "}
-                <span
-                  className="text-green-700"
-                  style={{ textShadow: "0 0 15px rgba(0,110,28,0.1)" }}
-                >
-                  RPG Fresh
-                </span>
-              </h1>
-              <p className="text-lg text-gray-500 max-w-xl leading-relaxed">
-                Bridging the gap between premium agriculture and global distribution. Partner with us for
-                reliable logistics and farm-to-table excellence across borders.
-              </p>
-            </div>
+        <section className="relative h-[280px] md:h-[400px] flex items-center justify-center overflow-hidden bg-slate-900">
+          <div className="absolute inset-0 opacity-50">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuASRUKErmETFlrBcfpzeZgJ8YwD7CsQHDtHHzjdm9-VQqre2ilmUeQw4agp05TaKsDA_U5sY9v6_pEf2jc6avjYHQTos175H9kY7Dy7rareAemeW8rYhaiOjon5yctD90zMfpKacOrQW27O2u8ZE1iRf3sRoEDKa1qty1GqogKk3iQJ3Y3KbgGRtztKJdFrEseLt4n00d9oPPGiCsUI471YxGhFZdFYpkqLqH-TGAhnmgzFfGLRRH_igI822QySobdN9Pk8fqOJd2Ji"
+              alt="Contact RPG Fresh"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
+          </div>
+          <div className="relative z-10 text-center px-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">Contact Us</h1>
+            <p className="text-sm md:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+              Bridging premium agriculture and global distribution. Partner with us for farm-to-table excellence.
+            </p>
           </div>
         </section>
 
         {/* ── Bento Contact Area ───────────────────────────────────────────── */}
-        <section className="px-6 pb-24">
+        <section className="px-4 md:px-6 pt-10 md:pt-16 pb-16 md:pb-24">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
               {/* ── Contact Form ── */}
               <div
-                className="lg:col-span-7 rounded-xl p-8 lg:p-10 shadow-xl border border-gray-100 bg-white"
+                className="lg:col-span-7 rounded-xl p-6 md:p-8 lg:p-10 shadow-xl border border-gray-100 bg-white"
                 style={{ backdropFilter: "blur(12px)" }}
               >
                 <h2 className="text-2xl font-semibold text-gray-900 mb-8">Send an Inquiry</h2>
@@ -213,36 +215,53 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Office Locations */}
-                <div className="rounded-xl p-8 flex-1 bg-white shadow-lg">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-6">Our Offices</h3>
-                  <div className="space-y-6">
-                    {OFFICES.map(({ icon, title, address }) => (
-                      <div key={title} className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                          <span className="material-symbols-outlined text-blue-500">{icon}</span>
-                        </div>
-                        <div>
-                          <p className="text-gray-900 font-bold">{title}</p>
-                          <p className="text-gray-500 text-sm">{address}</p>
-                        </div>
-                      </div>
-                    ))}
-
-                    {/* ISO badge */}
-                    <div className="mt-8 p-4 bg-gray-100 rounded-lg flex items-center gap-4">
-                      <span
-                        className="material-symbols-outlined text-green-700"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        verified
-                      </span>
-                      <p className="text-xs text-gray-500">
-                        All operations are ISO 22000 &amp; HACCP Certified for food safety.
-                      </p>
+                {/* Office Location */}
+                <div className="rounded-xl p-8 bg-white shadow-lg">
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-6">Our Office</h3>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-blue-500">location_on</span>
+                    </div>
+                    <div>
+                      <p className="text-gray-900 font-bold">India Headquarters</p>
+                      <p className="text-gray-500 text-sm">Tamil Nadu, India</p>
                     </div>
                   </div>
+                  <div className="mt-6 p-4 bg-gray-100 rounded-lg flex items-center gap-4">
+                    <span
+                      className="material-symbols-outlined text-green-700"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      verified
+                    </span>
+                    <p className="text-xs text-gray-500">
+                      All operations are ISO 22000 &amp; HACCP Certified for food safety.
+                    </p>
+                  </div>
                 </div>
+
+                {/* Quick Links */}
+                {/* <div className="rounded-xl p-8 bg-white shadow-lg flex-1">
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-6">Explore More</h3>
+                  <div className="space-y-4">
+                    {QUICK_LINKS.map(({ icon, label, desc, to }) => (
+                      <Link
+                        key={to}
+                        to={to}
+                        className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-green-700/30 hover:bg-green-50 transition-all group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-green-50 group-hover:bg-green-100 flex items-center justify-center shrink-0 transition-colors">
+                          <span className="material-symbols-outlined text-green-700">{icon}</span>
+                        </div>
+                        <div>
+                          <p className="text-gray-900 font-bold group-hover:text-green-800 transition-colors">{label}</p>
+                          <p className="text-gray-500 text-sm">{desc}</p>
+                        </div>
+                        <span className="material-symbols-outlined text-gray-300 group-hover:text-green-700 ml-auto transition-colors">arrow_forward</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -250,7 +269,7 @@ export default function Contact() {
 
         {/* ── Global Trade Routes Map ───────────────────────────────────────── */}
         <section
-          className="py-24 px-6 border-y border-gray-100 relative overflow-hidden"
+          className="py-12 md:py-24 px-4 md:px-6 border-y border-gray-100 relative overflow-hidden"
           style={{ background: "radial-gradient(circle at center, #ffffff 0%, #f7f9fb 100%)" }}
         >
           <div className="max-w-7xl mx-auto relative z-10">
@@ -266,7 +285,7 @@ export default function Contact() {
             </div>
 
             {/* Map image */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl bg-gray-900 group">
+            <div className="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl bg-gray-900 group">
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnj19onVvXfDhUZmTilE4xNlJ7BaQ21ZxJzSsR5gRbfdyV4AgExbH82EAp2iEWjQbeybmM8lhaWmC6ZBCNuOdFFrl9PTDDoepZgVzW9fM9dfL4RI87t_0r0h3XZVt4QdzHsDGco2trIn4mxtohI-OYSaCN-r2gA8yuXW-7xDVovNHE8fRUnu2Zz52QwaKcFrlsXBZM5B9Sj5OTCU-X9VWN7P9133YdOlkFhSXM4uvYQxxistdpYnjCSAG7GbyZkXbPvE95xelDOflP"
                 alt="Global Logistics Network"
@@ -292,20 +311,20 @@ export default function Contact() {
         </section>
 
         {/* ── CTA Banner ───────────────────────────────────────────────────── */}
-        <section className="py-24 px-6 bg-white">
+        <section className="py-12 md:py-24 px-4 md:px-6 bg-white">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-green-50 rounded-3xl p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-green-700/10">
+            <div className="bg-green-50 rounded-3xl p-6 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-green-700/10">
               {/* Decorative blob */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-green-700/10 blur-3xl -mr-32 -mt-32 pointer-events-none" />
 
               {/* Text */}
               <div className="relative z-10 max-w-xl">
-                <h2 className="text-[32px] font-semibold text-gray-900 mb-4">
-                  Ready to Partner?
+                <h2 className="text-2xl md:text-[32px] font-semibold text-gray-900 mb-4">
+                  Ready to Start Importing?
                 </h2>
-                <p className="text-lg text-gray-500 leading-relaxed">
-                  We are currently accepting new distribution partners for the upcoming seasonal
-                  harvest. Join the RPG Fresh network today.
+                <p className="text-base md:text-lg text-gray-500 leading-relaxed">
+                  We are currently accepting new import inquiries for the upcoming seasonal
+                  harvest. Begin your import journey with RPG Fresh today.
                 </p>
               </div>
 

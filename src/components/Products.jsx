@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 // ── Data ───────────────────────────────────────────────────────────────────
 
@@ -326,7 +327,7 @@ function ProductCard({ product, index }) {
 function VegetableSection({ section, index }) {
   const reversed = index % 2 !== 0;
   return (
-    <div className={`flex flex-col ${reversed ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 mb-24`}>
+    <div className={`flex flex-col ${reversed ? "lg:flex-row-reverse" : "lg:flex-row"} gap-8 md:gap-12 mb-12 md:mb-24`}>
       {/* Image panel */}
       <div className="lg:w-1/2">
         <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-video lg:aspect-auto lg:h-[500px] group">
@@ -397,8 +398,21 @@ function FaqItem({ faq }) {
 
 // ── Main Export ─────────────────────────────────────────────────────────────
 
+const VALID_CATEGORIES = new Set(["fruits", "vegetables", "papad", "coconut"]);
+
 export default function Products() {
-  const [activeCategory, setActiveCategory] = useState("fruits");
+  const [searchParams] = useSearchParams();
+  const [activeCategory, setActiveCategory] = useState(() => {
+    const param = searchParams.get("category");
+    return VALID_CATEGORIES.has(param) ? param : "fruits";
+  });
+
+  useEffect(() => {
+    const param = searchParams.get("category");
+    if (VALID_CATEGORIES.has(param)) {
+      setActiveCategory(param);
+    }
+  }, [searchParams]);
 
   const data = PRODUCTS[activeCategory];
   const isSplit = data?.isSplitLayout === true;
@@ -409,7 +423,7 @@ export default function Products() {
       <main className="min-h-screen pb-24 md:pb-12">
 
         {/* Hero */}
-        <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-slate-900">
+        <section className="relative h-[280px] md:h-[400px] flex items-center justify-center overflow-hidden bg-slate-900">
           <div className="absolute inset-0 opacity-50">
             <img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuASRUKErmETFlrBcfpzeZgJ8YwD7CsQHDtHHzjdm9-VQqre2ilmUeQw4agp05TaKsDA_U5sY9v6_pEf2jc6avjYHQTos175H9kY7Dy7rareAemeW8rYhaiOjon5yctD90zMfpKacOrQW27O2u8ZE1iRf3sRoEDKa1qty1GqogKk3iQJ3Y3KbgGRtztKJdFrEseLt4n00d9oPPGiCsUI471YxGhFZdFYpkqLqH-TGAhnmgzFfGLRRH_igI822QySobdN9Pk8fqOJd2Ji"
@@ -419,8 +433,8 @@ export default function Products() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
           </div>
           <div className="relative z-10 text-center px-6">
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">Export Catalog</h1>
-            <p className="text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">Export Catalog</h1>
+            <p className="text-sm md:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
               Sourcing the finest organic produce across borders. Quality verified, freshness guaranteed.
             </p>
           </div>

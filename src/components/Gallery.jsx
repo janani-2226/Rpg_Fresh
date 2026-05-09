@@ -57,7 +57,7 @@ const SUSTAINABILITY_STATS = [
 function GalleryCard({ item }) {
   return (
     <div className="group cursor-pointer">
-      <div className="relative h-[400px] overflow-hidden rounded-2xl bg-gray-100 mb-4 shadow-sm group-hover:shadow-xl transition-all border border-gray-200/50">
+      <div className="relative h-[220px] sm:h-[300px] md:h-[400px] overflow-hidden rounded-2xl bg-gray-100 mb-4 shadow-sm group-hover:shadow-xl transition-all border border-gray-200/50">
         <img
           src={item.src}
           alt={item.alt}
@@ -86,47 +86,26 @@ export default function Gallery() {
       <main className="">
 
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
-        <section className="relative min-h-[700px] flex items-center justify-center overflow-hidden py-16">
-          {/* Background */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1A3A5F]/90 to-[#1A3A5F]/40 z-10" />
+        <section className="relative h-[280px] md:h-[400px] flex items-center justify-center overflow-hidden bg-slate-900">
+          <div className="absolute inset-0 opacity-50">
             <img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1EDt1xv9fXCC8u1_6jrbGQTSfiPjiGc_gwPvROuMNqQ5taHQ4IFIW0_7RrJhXu7h2ntMts2h5vJoS6PtbMsoMQs2u94v3zCX69bwYtXqzIiuVq2f0aIeRn_oNrbLgLR5Bm5Bjm4nFdnyiGjD509AwEPzSUG1XmrGrFYurv6KrfVKM_YfWrwUF-6iY20TIq-2nKF3PSxa8wLERMycmLdWfhq-QktWARBn9_kN7rkYJb2TH2fzIXXmIN-5C8Baq05U_M3tjCfWLRCVE"
               alt="Organic Farm Hero"
               className="w-full h-full object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
           </div>
-
-          {/* Hero content */}
-          <div className="relative z-20 max-w-[1280px] px-8 w-full text-left">
-            <div className="max-w-3xl">
-              <span className="text-[#4CAF50] text-[12px] font-bold uppercase tracking-widest mb-4 block">
-                Precision Logistics • Premium Produce
-              </span>
-              <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
-                Witness the Journey of{" "}
-                <span className="text-[#4CAF50]">Freshness</span>
-              </h1>
-              <p className="text-lg text-white/90 mb-10 leading-relaxed">
-                Experience our farm-to-table traceability through a high-definition visual lens. We bridge
-                the gap between organic soil and global distribution with unmatched efficiency.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <button className="bg-[#4CAF50] text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-green-400/40 transition-all flex items-center gap-2">
-                  Explore Our Quality
-                  <span className="material-symbols-outlined">arrow_forward</span>
-                </button>
-                <button className="border-2 border-white/40 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all">
-                  Get a Quote
-                </button>
-              </div>
-            </div>
+          <div className="relative z-10 text-center px-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">Visual Gallery</h1>
+            <p className="text-sm md:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+              A high-definition lens into our farms, cold-chain process, and global harvest journey.
+            </p>
           </div>
         </section>
 
         {/* ── Featured Video ─────────────────────────────────────────────────── */}
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-[1280px] px-8 mx-auto">
+        <section className="py-10 md:py-16 bg-gray-50">
+          <div className="max-w-[1280px] px-4 md:px-8 mx-auto">
             {/* Section header */}
             <div className="mb-12 text-center">
               <h2 className="text-[32px] font-semibold text-[#1A3A5F] mb-4">
@@ -163,7 +142,7 @@ export default function Gallery() {
                 {/* Bottom bar */}
                 <div className="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                   <div className="text-white drop-shadow-lg">
-                    <h3 className="text-2xl font-semibold mb-1">24/7 Supply Chain Monitoring</h3>
+                    <h3 className="text-lg md:text-2xl font-semibold mb-1">24/7 Supply Chain Monitoring</h3>
                     <p className="text-base text-white/90">From picking to final port of entry</p>
                   </div>
 
@@ -188,8 +167,8 @@ export default function Gallery() {
         </section>
 
         {/* ── Media Gallery ──────────────────────────────────────────────────── */}
-        <section className="py-16 bg-white">
-          <div className="max-w-[1280px] px-8 mx-auto">
+        <section className="py-10 md:py-16 bg-white">
+          <div className="max-w-[1280px] px-4 md:px-8 mx-auto">
             {/* Gallery header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
               <div>

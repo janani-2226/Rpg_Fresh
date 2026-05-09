@@ -31,6 +31,7 @@ export default function Landing() {
   const products = [
     {
       name: "Fruits",
+      categoryKey: "fruits",
       tag: "Premium",
       tagStyle: "text-secondary bg-secondary/10",
       desc: "Mangoes, Grapes, Pomegranates & seasonal varieties.",
@@ -38,6 +39,7 @@ export default function Landing() {
     },
     {
       name: "Vegetables",
+      categoryKey: "vegetables",
       tag: "Organic",
       tagStyle: "text-on-primary-container bg-primary-container/20",
       desc: "Onion, Chili, Drumstick & nutrient-rich Leafy Greens.",
@@ -45,6 +47,7 @@ export default function Landing() {
     },
     {
       name: "Coconut",
+      categoryKey: "coconut",
       tag: "Bulk",
       tagStyle: "text-secondary bg-secondary/10",
       desc: "Husked, Semi-Husked & refreshing Tender Coconuts.",
@@ -52,6 +55,7 @@ export default function Landing() {
     },
     {
       name: "Papad",
+      categoryKey: "papad",
       tag: "Traditional",
       tagStyle: "text-on-primary-container bg-primary-container/20",
       desc: "Authentic Indian flavors, hygienically processed and packed.",
@@ -62,7 +66,7 @@ export default function Landing() {
   return (
     <main>
       {/* ===================== Hero Section ===================== */}
-      <section className="relative h-[90vh] min-h-[700px] flex items-center overflow-hidden">
+      <section className="relative h-[80vh] min-h-[580px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             alt="Fresh Produce Logistics"
@@ -73,11 +77,17 @@ export default function Landing() {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full animate-fade-in-up">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-secondary-container/50 border border-secondary/20 text-secondary font-label-caps tracking-[0.2em] text-[10px]">
-              <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-              FRESH | PURE | GLOBAL
-            </span>
-            <h1 className="font-headline-xl text-on-surface mb-6 leading-[1.1] text-5xl md:text-7xl">
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+              {["FRESH", "PURE", "GLOBAL"].map((topic) => (
+                <span
+                  key={topic}
+                  className="px-4 py-1.5 rounded-sm border-2 border-white text-white font-black tracking-[0.2em] text-xs uppercase"
+                >
+                  {topic}
+                </span>
+              ))}
+            </div>
+            <h1 className="font-headline-xl text-on-surface mb-6 leading-[1.1] text-3xl sm:text-5xl md:text-7xl">
               Freshness that travels miles without losing a smile.
             </h1>
             <p className="text-on-surface-variant text-body-lg mb-10 max-w-2xl leading-relaxed">
@@ -205,9 +215,9 @@ export default function Landing() {
             </h2>
             <div className="w-16 h-1 bg-secondary mx-auto rounded-full"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto md:auto-rows-[300px]">
             {/* Global Reach */}
-            <div className="md:col-span-8 glass-card rounded-2xl p-10 flex flex-col relative overflow-hidden group shadow-sm justify-center items-center text-center">
+            <div className="md:col-span-8 glass-card rounded-2xl p-8 md:p-10 flex flex-col relative overflow-hidden group shadow-sm justify-center items-center text-center min-h-[200px] md:min-h-0">
               <div className="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-6 shadow-sm">
                 <span className="material-symbols-outlined text-5xl">public</span>
               </div>
@@ -223,7 +233,7 @@ export default function Landing() {
             </div>
 
             {/* Quality Assurance */}
-            <div className="md:col-span-4 glass-card rounded-2xl p-10 flex flex-col justify-center items-center text-center shadow-sm">
+            <div className="md:col-span-4 glass-card rounded-2xl p-8 md:p-10 flex flex-col justify-center items-center text-center shadow-sm min-h-[200px] md:min-h-0">
               <div className="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center text-secondary mb-6 shadow-sm">
                 <span className="material-symbols-outlined text-5xl">
                   verified_user
@@ -239,7 +249,7 @@ export default function Landing() {
             </div>
 
             {/* Packing & Labeling */}
-            <div className="md:col-span-4 glass-card rounded-2xl p-10 flex flex-col justify-center border-l-4 border-l-secondary shadow-sm">
+            <div className="md:col-span-4 glass-card rounded-2xl p-8 md:p-10 flex flex-col justify-center border-l-4 border-l-secondary shadow-sm min-h-[200px] md:min-h-0">
               <span className="material-symbols-outlined text-secondary text-5xl mb-6">
                 inventory_2
               </span>
@@ -253,7 +263,7 @@ export default function Landing() {
             </div>
 
             {/* Sustainability */}
-            <div className="md:col-span-8 glass-card rounded-2xl p-10 flex items-center gap-10 relative overflow-hidden shadow-sm justify-center text-center">
+            <div className="md:col-span-8 glass-card rounded-2xl p-8 md:p-10 flex items-center gap-10 relative overflow-hidden shadow-sm justify-center text-center min-h-[200px] md:min-h-0">
               <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8">
                 <div className="shrink-0 w-20 h-20 bg-primary-container/20 rounded-2xl flex items-center justify-center text-secondary shadow-sm">
                   <span className="material-symbols-outlined text-5xl">
@@ -284,29 +294,30 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
             <div>
-              <h2 className="font-headline-lg text-on-surface">
-                Our Signature Collection
+              <h2 className="text-4xl md:text-5xl font-black text-on-surface uppercase tracking-tight leading-none">
+                Our Signature<br />Collection
               </h2>
-              <p className="text-on-surface-variant mt-2 text-lg">
+              <p className="text-on-surface-variant mt-3 text-base">
                 Premium exports curated specifically for discerning international
                 markets.
               </p>
             </div>
-            <a
-              href="#"
+            <Link
+              to="/products"
               className="group text-secondary font-bold flex items-center gap-2 px-6 py-3 bg-white border border-secondary/20 rounded-lg hover:bg-secondary hover:text-on-secondary transition-all shadow-sm"
             >
               View Full Catalog{" "}
               <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                 arrow_right_alt
               </span>
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {products.map((p) => (
-              <div
+              <Link
                 key={p.name}
-                className="group relative bg-white rounded-2xl overflow-hidden shadow-md transition-all hover:translate-y-[-12px] border border-black/5"
+                to={`/products?category=${p.categoryKey}`}
+                className="group relative bg-white rounded-2xl overflow-hidden shadow-md transition-all hover:translate-y-[-12px] hover:shadow-xl border border-black/5 cursor-pointer"
               >
                 <div className="h-72 overflow-hidden">
                   <img
@@ -329,8 +340,12 @@ export default function Landing() {
                   <p className="text-on-surface-variant text-sm leading-relaxed">
                     {p.desc}
                   </p>
+                  <div className="flex items-center gap-1 mt-4 text-secondary font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                    Explore
+                    <span className="material-symbols-outlined text-base">arrow_forward</span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -341,7 +356,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <h2 className="font-headline-lg text-on-surface mb-4">
+              <h2 className="text-4xl md:text-5xl font-black text-on-surface uppercase tracking-tight leading-none mb-4">
                 Connected to the Earth's Rhythm
               </h2>
               <p className="text-on-surface-variant mb-12 text-lg leading-relaxed">
@@ -379,21 +394,18 @@ export default function Landing() {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl border border-black/5 bg-white">
                 <img
-                  alt="Sustainable Organic Agriculture"
-                  className="w-full h-[500px] object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiuY1wBR_FT3c1aerndpHGgTLsA8LrzlMoE7a_TTPpcTK6ttsSRGfUUgfc1MfOZ6ApHG3QFx-yPJWIiJsIncPVhEDsWYbShj-FophgRJN6OioERlshtvkKJz5DJDWMzvOv6XQJLuRpcRhXZTbeQipXoaM71heBBujXqTcTqABivYUA_mFUkOxuAH7w6cmN6HIsHW-SqU1fEsmb2Rcyo7OhR33jLzbDH425RD6RyKv7ZloIXY7rWpV0YugjBLmqDaICMcw0WvVYdVUi"
+                  alt="RPG Fresh Global Exports"
+                  className="w-full h-auto object-contain"
+                  src="https://ik.imagekit.io/ux5g9gl0h/Gemini_Generated_Image_tcohgutcohgutcoh.png"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                <div className="absolute bottom-8 left-8 text-white">
-                  <p className="font-label-caps text-xs mb-2">
-                    SUSTAINABILITY FIRST
-                  </p>
-                  <p className="text-xl font-bold">
-                    100% Certified Organic Practices
-                  </p>
-                </div>
+                {/* <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 inline-flex items-center gap-2 shadow-sm border border-black/5">
+                    <span className="material-symbols-outlined text-secondary text-base" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                    <p className="text-xs font-bold text-gray-800 uppercase tracking-widest">RPG Fresh Exports — Global Network</p>
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>
