@@ -3,14 +3,15 @@ import { Link, useLocation } from "react-router-dom";
 export default function Navbar() {
   const { pathname } = useLocation();
 
+  // ImageKit CDN URL
   const logo =
-    "https://collection.cloudinary.com/doch21lae/d92b17ec9bc072fc265ce419363fec87";
+    "https://ik.imagekit.io/ux5g9gl0h/Logo%20(2).png";
 
   const navLinks = [
     { name: "Home", to: "/" },
     { name: "Products", to: "/products" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Contact", href: "/contact" },
+    { name: "Gallery", to: "/gallery" },
+    { name: "Contact", to: "/contact" },
   ];
 
   return (
@@ -22,35 +23,25 @@ export default function Navbar() {
           <img
             src={logo}
             alt="RPG Fresh"
-            className="h-16 w-auto object-contain"
+            className="h-16 w-auto object-contain mix-blend-multiply"
           />
         </Link>
 
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-10 font-manrope antialiased text-sm font-semibold tracking-wide">
-          {navLinks.map((link) =>
-            link.to ? (
-              <Link
-                key={link.name}
-                to={link.to}
-                className={
-                  pathname === link.to
-                    ? "text-secondary border-b-2 border-secondary pb-1"
-                    : "text-on-surface-variant hover:text-secondary transition-colors"
-                }
-              >
-                {link.name}
-              </Link>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-on-surface-variant hover:text-secondary transition-colors"
-              >
-                {link.name}
-              </a>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.to}
+              className={
+                pathname === link.to
+                  ? "text-secondary border-b-2 border-secondary pb-1"
+                  : "text-on-surface-variant hover:text-secondary transition-colors"
+              }
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
 
       </nav>
